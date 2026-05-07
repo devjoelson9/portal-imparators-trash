@@ -1,70 +1,97 @@
-import { useState } from 'react'
+import { useState, useEffect } from "react";
+import { Menu, X, Download } from "lucide-react";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    element?.scrollIntoView({ behavior: 'smooth' })
-    setIsMenuOpen(false)
-  }
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: "smooth" });
+    setIsMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navItems = ["features", "gameplay", "download"];
 
   return (
-    <header className="sticky top-0 z-50 bg-dark-card/70 backdrop-blur border-b border-neon-green/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          {/* Logo */}
-          <div className="flex items-center gap-3 group cursor-pointer">
-            <div className="w-10 h-10 bg-gradient-gaming rounded-lg flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-lg shadow-neon-green/40">
-              <span className="text-xl">♻️👑</span>
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-gray-950/80 backdrop-blur-md border-b border-white/5 shadow-lg"
+          : "bg-gray-950/40"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between h-16">
+
+          {/* LOGO */}
+          <div className="flex items-center gap-3 cursor-pointer group">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-green-400 to-cyan-400 flex items-center justify-center font-bold text-black group-hover:scale-105 transition">
+              TE
             </div>
-            <span className="bg-gradient-gaming bg-clip-text text-transparent font-bold text-xl sm:text-2xl">TRASH EMPERORS</span>
+
+            <span className="text-white font-semibold tracking-wide text-lg">
+              Trash Emperors
+            </span>
           </div>
 
-          {/* Menu Desktop */}
-          <nav className="hidden md:flex gap-8">
-            {['Features', 'Gameplay', 'Download'].map((item) => (
-              <button 
+          {/* DESKTOP NAV */}
+          <nav className="hidden md:flex items-center gap-10">
+            {navItems.map((item) => (
+              <button
                 key={item}
-                onClick={() => scrollToSection(item.toLowerCase())}
-                className="text-white font-medium hover:text-neon-green transition-colors relative group"
+                onClick={() => scrollToSection(item)}
+                className="relative text-sm text-gray-400 hover:text-white transition group capitalize"
               >
                 {item}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-gaming group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-green-400 to-cyan-400 group-hover:w-full transition-all duration-300" />
               </button>
             ))}
           </nav>
 
-          {/* Menu Mobile Toggle */}
-          <button 
-            className="md:hidden text-neon-green text-2xl hover:text-neon-yellow transition-colors"
+          {/* CTA DESKTOP */}
+          <div className="hidden md:block">
+            <button className="flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-green-400 to-cyan-400 text-black font-semibold hover:scale-105 transition shadow-md shadow-green-500/20">
+              <Download size={16} />
+              Download
+            </button>
+          </div>
+
+          {/* MOBILE BUTTON */}
+          <button
+            className="md:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            ☰
-          </button>
-
-          {/* CTA Button Desktop */}
-          <button className="hidden sm:block px-6 py-3 rounded-lg font-bold transition-all duration-300 uppercase tracking-wider text-sm bg-gradient-gaming text-black hover:shadow-lg hover:shadow-neon-green/50 hover:scale-105">
-            Download Now
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* MOBILE MENU */}
         {isMenuOpen && (
-          <div className="md:hidden pb-4 space-y-3 animate-slideInDown">
-            {['Features', 'Gameplay', 'Download'].map((item) => (
-              <button 
+          <div className="md:hidden mt-3 rounded-xl border border-white/5 bg-gray-950/90 backdrop-blur-md p-4 space-y-3 shadow-xl">
+            {navItems.map((item) => (
+              <button
                 key={item}
-                onClick={() => scrollToSection(item.toLowerCase())}
-                className="block w-full text-left text-white hover:text-neon-green transition-colors py-2 font-medium"
+                onClick={() => scrollToSection(item)}
+                className="block w-full text-left text-gray-300 hover:text-white transition capitalize"
               >
                 {item}
               </button>
             ))}
-            <button className="w-full px-6 py-3 rounded-lg font-bold transition-all duration-300 uppercase tracking-wider text-sm bg-gradient-gaming text-black hover:shadow-lg hover:shadow-neon-green/50 hover:scale-105">Download Now</button>
+
+            <button className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gradient-to-r from-green-400 to-cyan-400 text-black font-semibold hover:scale-105 transition">
+              <Download size={16} />
+              Download
+            </button>
           </div>
         )}
       </div>
     </header>
-  )
+  );
 }

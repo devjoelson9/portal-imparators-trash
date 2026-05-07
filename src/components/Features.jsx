@@ -1,101 +1,144 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { FileText, GlassWater, Package, Leaf, Apple, Target, Trophy, Zap } from "lucide-react";
 
 export default function Features() {
-  const [activeFeature, setActiveFeature] = useState(0)
+  const [activeFeature, setActiveFeature] = useState(0);
 
   const features = [
     {
       id: 0,
-      emoji: '📄',
-      name: 'Papel',
-      color: 'from-amber-600 to-amber-800',
-      description: 'Colete jornais, revistas e papelão. Aprenda sobre a importância da reciclagem de papel para preservar florestas.',
-      points: 100
+      icon: <FileText size={28} />,
+      name: "Papel",
+      description:
+        "Colete jornais, revistas e papelão. Preserve florestas através da reciclagem.",
+      points: 100,
     },
     {
       id: 1,
-      emoji: '🔵',
-      name: 'Vidro',
-      color: 'from-blue-400 to-blue-600',
-      description: 'Recolha garrafas e frascos de vidro. O vidro pode ser reciclado infinitamente sem perder qualidade!',
-      points: 150
+      icon: <GlassWater size={28} />,
+      name: "Vidro",
+      description:
+        "Garrafas e frascos podem ser reciclados infinitamente sem perder qualidade.",
+      points: 150,
     },
     {
       id: 2,
-      emoji: '🥫',
-      name: 'Metal',
-      color: 'from-gray-400 to-gray-600',
-      description: 'Colete latas e objetos metálicos. A reciclagem de metais economiza 95% da energia necessária para criar novos.',
-      points: 120
+      icon: <Package size={28} />,
+      name: "Metal",
+      description:
+        "Economize até 95% de energia ao reciclar metais.",
+      points: 120,
     },
     {
       id: 3,
-      emoji: '🟢',
-      name: 'Plástico',
-      color: 'from-green-400 to-green-600',
-      description: 'Recolha garrafas plásticas e embalagens. Cada peça de plástico reciclado reduz a poluição dos oceanos.',
-      points: 80
+      icon: <Leaf size={28} />,
+      name: "Plástico",
+      description:
+        "Reduza a poluição dos oceanos reciclando plásticos corretamente.",
+      points: 80,
     },
     {
       id: 4,
-      emoji: '🍌',
-      name: 'Orgânico',
-      color: 'from-orange-600 to-orange-800',
-      description: 'Colete resíduos de alimentos. Esses materiais podem ser transformados em adubo e energia!',
-      points: 90
-    }
-  ]
+      icon: <Apple size={28} />,
+      name: "Orgânico",
+      description:
+        "Transforme resíduos em energia e adubo natural.",
+      points: 90,
+    },
+  ];
 
   return (
-    <section id="features" className="py-20 sm:py-32 px-4 relative overflow-hidden">
-      {/* Fundo com gradiente */}
-      <div className="absolute inset-0 bg-gradient-dark pointer-events-none" />
-      <div className="absolute top-20 left-10 w-72 h-72 bg-neon-green/5 rounded-full blur-3xl pointer-events-none" />
+    <section id="features" className="relative py-24 overflow-hidden">
       
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-16 sm:mb-20">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-gaming bg-clip-text text-transparent">Tipos de Resíduos</h2>
-          <p className="text-gray-300 text-lg">Aprenda sobre cada tipo de lixo enquanto joga</p>
+      {/* BACKGROUND */}
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+        {/* HEADER */}
+        <div className="text-center mb-20">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4">
+            Tipos de{" "}
+            <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
+              Resíduos
+            </span>
+          </h2>
+
+          <p className="text-gray-400 text-lg">
+            Aprenda reciclagem enquanto joga
+          </p>
         </div>
 
-        {/* Grid de Features */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
+        {/* FEATURES */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
           {features.map((feature) => (
             <div
               key={feature.id}
               onClick={() => setActiveFeature(feature.id)}
-              className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 transform hover:scale-105 bg-dark-card/70 backdrop-blur border border-neon-green/10 ${
-                activeFeature === feature.id ? 'ring-2 ring-neon-green shadow-lg shadow-neon-green/50' : ''
+              className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 border ${
+                activeFeature === feature.id
+                  ? "border-green-400 bg-gray-900 shadow-lg shadow-green-500/20 scale-105"
+                  : "border-gray-800 bg-gray-900 hover:border-gray-700"
               }`}
             >
-              <div className="text-5xl mb-3">{feature.emoji}</div>
-              <h3 className="font-bold text-xl mb-2">{feature.name}</h3>
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-neon-green">+{feature.points} pts</span>
-                <span className="text-lg">→</span>
+              <div className="mb-4 text-green-400">
+                {feature.icon}
               </div>
+
+              <h3 className="text-white font-semibold text-lg mb-2">
+                {feature.name}
+              </h3>
+
+              <p className="text-xs text-green-400 font-semibold mb-2">
+                +{feature.points} pts
+              </p>
+
               {activeFeature === feature.id && (
-                <p className="text-sm text-gray-300 mt-3 pt-3 border-t border-neon-green/30">{feature.description}</p>
+                <p className="text-sm text-gray-400 mt-3 border-t border-gray-800 pt-3">
+                  {feature.description}
+                </p>
               )}
             </div>
           ))}
         </div>
 
-        {/* Info Boxes */}
-        <div className="grid md:grid-cols-3 gap-6 mt-12">
+        {/* INFO CARDS */}
+        <div className="grid md:grid-cols-3 gap-6">
+
           {[
-            { icon: '🎯', title: 'Objetivos', desc: 'Seu objetivo é coletar diferentes tipos de resíduos e aprender como separar o lixo corretamente para salvar o planeta.' },
-            { icon: '🏆', title: 'Pontuação', desc: 'Quanto mais material você coleta corretamente, mais pontos acumula! Desafie seus amigos e suba no ranking.' },
-            { icon: '⚡', title: 'Power-ups', desc: 'Desbloqueie power-ups especiais para multiplicar pontos, proteger seu caminhão e muito mais!' }
-          ].map((box, i) => (
-            <div key={i} className="p-8 rounded-2xl bg-dark-card/70 backdrop-blur hover:border-neon-green/50 border border-neon-green/20 transition-all hover:shadow-lg hover:shadow-neon-green/30">
-              <div className="text-4xl mb-3">{box.icon}</div>
-              <h4 className="font-bold text-lg mb-2">{box.title}</h4>
-              <p className="text-gray-300 text-sm">{box.desc}</p>
+            {
+              icon: <Target size={28} />,
+              title: "Objetivo",
+              desc: "Colete resíduos e aprenda a separar o lixo corretamente.",
+            },
+            {
+              icon: <Trophy size={28} />,
+              title: "Pontuação",
+              desc: "Ganhe pontos e suba no ranking com seus amigos.",
+            },
+            {
+              icon: <Zap size={28} />,
+              title: "Power-ups",
+              desc: "Desbloqueie habilidades para aumentar sua performance.",
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="p-8 rounded-2xl bg-gray-900 border border-gray-800 hover:border-green-400/40 transition hover:shadow-lg hover:shadow-green-500/10"
+            >
+              <div className="text-green-400 mb-4">{item.icon}</div>
+
+              <h4 className="text-white font-semibold mb-2">
+                {item.title}
+              </h4>
+
+              <p className="text-gray-400 text-sm">
+                {item.desc}
+              </p>
             </div>
           ))}
+
         </div>
       </div>
     </section>
-  )
+  );
 }

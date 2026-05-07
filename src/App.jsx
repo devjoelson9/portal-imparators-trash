@@ -7,7 +7,16 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-dark text-white flex flex-col overflow-x-hidden">
+    <div className="relative min-h-screen bg-gray-950 text-white overflow-hidden">
+
+      {/* BACKGROUND GLOBAL */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-green-500/30 blur-[150px] rounded-full" />
+        
+        <div className="absolute bottom-[-200px] right-[-150px] w-[700px] h-[700px] bg-cyan-500/30 blur-[150px] rounded-full" />
+      </div>
+
+      {/* CONTEÚDO */}
       <Header />
       <Hero />
       <Features />
@@ -15,7 +24,7 @@ function App() {
       <Download />
       <Footer />
     </div>
-  )
+  );
 }
 
 export default App
