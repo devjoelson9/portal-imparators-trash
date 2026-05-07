@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Download } from "lucide-react";
+import logo from "../assets/logo.png";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,13 +33,7 @@ export default function Header() {
 
           {/* LOGO */}
           <div className="flex items-center gap-3 cursor-pointer group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-green-400 to-cyan-400 flex items-center justify-center font-bold text-black group-hover:scale-105 transition">
-              TE
-            </div>
-
-            <span className="text-white font-semibold tracking-wide text-lg">
-              Trash Emperors
-            </span>
+            <img src={logo} alt="Trash Emperors Logo" className="w-45 h-45 object-contain"/>
           </div>
 
           {/* DESKTOP NAV */}
