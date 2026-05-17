@@ -51,13 +51,7 @@ export default function Header() {
           </nav>
 
           {/* CTA DESKTOP */}
-          <div className="hidden md:block">
-            <button className="flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-green-400 to-cyan-400 text-black font-semibold hover:scale-105 transition shadow-md shadow-green-500/20">
-              <Download size={16} />
-              Download
-            </button>
-          </div>
-
+          
           {/* MOBILE BUTTON */}
           <button
             className="md:hidden text-white"
