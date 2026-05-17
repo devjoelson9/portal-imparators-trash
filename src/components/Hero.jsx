@@ -31,31 +31,11 @@ export default function Hero() {
               Baixar Agora
             </button>
 
-            <button className="flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-700 text-gray-300 hover:bg-gray-800 transition-all">
-              <Play size={18} />
-              Ver Trailer
-            </button>
+            
           </div>
 
           {/* BADGES */}
-          <div className="flex flex-wrap gap-4 pt-4">
-            
-            <div className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-full text-sm">
-              <Star size={16} className="text-yellow-400" />
-              4.8/5
-            </div>
-
-            <div className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-full text-sm">
-              <Users size={16} className="text-blue-400" />
-              50K+ jogadores
-            </div>
-
-            <div className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-full text-sm">
-              <Gamepad2 size={16} className="text-green-400" />
-              100% gratuito
-            </div>
-
-          </div>
+          
         </div>
 
         {/* VISUAL */}
